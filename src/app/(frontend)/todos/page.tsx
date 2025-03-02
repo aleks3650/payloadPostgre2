@@ -10,6 +10,7 @@ const page = async () => {
     limit: 10,
     sort: 'title',
   })
+  console.log(data)
   return (
     <div className="home">
       <h1>Todos</h1>
@@ -27,3 +28,5 @@ const page = async () => {
 }
 
 export default page
+
+export const revalidate = 10
