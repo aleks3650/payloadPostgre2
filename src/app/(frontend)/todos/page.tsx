@@ -1,5 +1,5 @@
-import config from '@/payload.config'
 import Link from 'next/link'
+import config from '@/payload.config'
 import { getPayload } from 'payload'
 
 const page = async () => {
@@ -10,7 +10,7 @@ const page = async () => {
     limit: 10,
     sort: 'title',
   })
-  console.log(data)
+
   return (
     <div className="home">
       <h1>Todos</h1>

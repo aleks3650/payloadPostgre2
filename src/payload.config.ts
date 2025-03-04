@@ -6,6 +6,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { emailAdapter } from '../src/adapters/email'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -15,12 +16,22 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  endpoints: [
+    {
+      path: '/test',
+      method: 'get',
+      handler: async (req) => {
+        return Response.json({message: "IT works!"})
+      },
+    }
+  ],
   admin: {
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
+  email: emailAdapter,
   collections: [Users, Media, Todos],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
