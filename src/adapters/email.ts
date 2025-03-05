@@ -2,6 +2,7 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
 import 'dotenv/config'
 
+
 export const emailAdapter = nodemailerAdapter({
   defaultFromAddress: 'qparanormal@gmail.com',
   defaultFromName: 'Q_Paranormall',

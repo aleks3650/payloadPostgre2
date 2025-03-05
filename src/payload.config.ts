@@ -7,23 +7,21 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { emailAdapter } from '../src/adapters/email'
+import {emailAPI, testAPI} from '../src/adapters/APIhandlers'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import Todos from './collections/Todos'
 
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  
   endpoints: [
-    {
-      path: '/test',
-      method: 'get',
-      handler: async (req) => {
-        return Response.json({message: "IT works!"})
-      },
-    }
+    testAPI,
+    emailAPI,
   ],
   admin: {
     user: Users.slug,
