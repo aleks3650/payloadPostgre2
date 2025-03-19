@@ -69,6 +69,7 @@ export interface Config {
     users: User;
     media: Media;
     todos: Todo;
+    'header-sweets': HeaderSweet;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -78,6 +79,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     todos: TodosSelect<false> | TodosSelect<true>;
+    'header-sweets': HeaderSweetsSelect<false> | HeaderSweetsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -165,6 +167,16 @@ export interface Todo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header-sweets".
+ */
+export interface HeaderSweet {
+  id: number;
+  title: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -181,6 +193,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'todos';
         value: number | Todo;
+      } | null)
+    | ({
+        relationTo: 'header-sweets';
+        value: number | HeaderSweet;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -266,6 +282,15 @@ export interface TodosSelect<T extends boolean = true> {
   description?: T;
   status?: T;
   dueDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header-sweets_select".
+ */
+export interface HeaderSweetsSelect<T extends boolean = true> {
+  title?: T;
   updatedAt?: T;
   createdAt?: T;
 }

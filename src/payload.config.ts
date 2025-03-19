@@ -7,22 +7,18 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { emailAdapter } from '../src/adapters/email'
-import {emailAPI, testAPI} from '../src/adapters/APIhandlers'
+import { emailAPI, SweetHeaderAPI, testAPI } from '../src/adapters/APIhandlers'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import Todos from './collections/Todos'
-
+import { HeaderSweets } from './collections/HeaderSweets'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  
-  endpoints: [
-    testAPI,
-    emailAPI,
-  ],
+  endpoints: [testAPI, emailAPI, SweetHeaderAPI],
   admin: {
     user: Users.slug,
     importMap: {
@@ -30,7 +26,7 @@ export default buildConfig({
     },
   },
   email: emailAdapter,
-  collections: [Users, Media, Todos],
+  collections: [Users, Media, Todos, HeaderSweets],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -40,7 +36,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
 
-      ssl: false
+      ssl: false,
     },
   }),
   sharp,
